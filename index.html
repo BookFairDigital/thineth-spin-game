@@ -1,51 +1,214 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Thineth | 2029 A/L Spin & Win</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070d38">
+<title>Thineth | Spin & Win</title>
 <style>
-:root{--navy:#142b57;--orange:#f4774f;--green:#1e9e68;--paper:#f7f8fc;--ink:#17233b}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#132957,#1f3d75);font-family:Arial,sans-serif;color:var(--ink);min-height:100vh}
-.wrap{max-width:760px;margin:auto;padding:24px 16px 48px}.brand{color:white;text-align:center;margin:8px 0 20px}.brand .year{font-size:clamp(42px,10vw,76px);font-weight:900;color:var(--orange);letter-spacing:-3px}.brand h1{margin:0;font-size:clamp(20px,5vw,30px)}.brand p{margin:7px 0;color:#dce6ff}
-.panel{background:white;border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 18px 55px #08132d66;margin:16px 0}.hidden{display:none!important}label{display:block;font-weight:700;font-size:14px;margin:14px 0 7px}input{width:100%;padding:14px;border:1px solid #cdd4e1;border-radius:11px;font-size:16px}button{border:0;border-radius:12px;padding:14px 18px;font-size:16px;font-weight:800;cursor:pointer;background:var(--green);color:white;width:100%;margin-top:14px}button.secondary{background:#e9eef8;color:var(--navy)}.fine{font-size:12px;line-height:1.5;color:#68748a}.check{display:flex;gap:9px;align-items:flex-start;margin-top:14px;font-size:13px;line-height:1.45}.check input{width:auto;margin-top:3px}.wheelarea{display:grid;place-items:center;gap:12px}.wheel{width:min(74vw,310px);height:min(74vw,310px);border-radius:50%;border:8px solid #fff;outline:4px solid var(--navy);position:relative;background:conic-gradient(#f4774f 0 45deg,#f8c44f 45deg 90deg,#36a4a2 90deg 135deg,#779bca 135deg 180deg,#9e69b6 180deg 225deg,#ee5c75 225deg 270deg,#6abf82 270deg 315deg,#f3a64d 315deg 360deg);transition:transform 4s cubic-bezier(.12,.7,.15,1)}.wheel:after{content:"SPIN";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;border:5px solid var(--navy);border-radius:50%;width:72px;height:72px;display:grid;place-items:center;font-weight:900;color:var(--navy)}.pointer{font-size:32px;line-height:1;margin-bottom:-24px;z-index:1;color:var(--orange);text-shadow:0 2px 0 white}.status{text-align:center;font-weight:700;margin-top:10px}.adminbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.adminbar button{width:auto;margin:0}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid #e6eaf1;white-space:nowrap}th{background:#f1f4fa}.pill{display:inline-block;background:#e4f7ed;color:#117246;border-radius:20px;padding:5px 9px;font-size:12px;font-weight:700}.error{color:#b42318;font-size:13px}.foot{text-align:center;color:#dce6ff;font-size:12px;margin-top:22px}
+:root{
+  --night:#070d38;--navy:#101957;--purple:#7c2cff;--pink:#ff26b7;
+  --cyan:#16d9ff;--gold:#ffd85a;--ink:#101849;--muted:#68739d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:radial-gradient(ellipse at 50% 0%,#252d82 0%,#11194f 35%,var(--night) 75%);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(2px);opacity:.55}
+body:before{width:340px;height:340px;top:10%;left:-230px;background:radial-gradient(circle,#1b76ff,transparent 70%)}
+body:after{width:380px;height:380px;right:-260px;top:38%;background:radial-gradient(circle,#9a19ff,transparent 70%)}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+.confetti i{position:absolute;width:8px;height:15px;border-radius:2px;background:var(--pink);opacity:.8;animation:fall 9s linear infinite}
+.confetti i:nth-child(3n){background:var(--cyan)}.confetti i:nth-child(4n){background:var(--gold)}
+.confetti i:nth-child(1){left:8%;top:-20px;animation-delay:-1s}.confetti i:nth-child(2){left:21%;top:-80px;animation-delay:-4s}
+.confetti i:nth-child(3){left:37%;top:-50px;animation-delay:-6s}.confetti i:nth-child(4){left:61%;top:-10px;animation-delay:-2s}
+.confetti i:nth-child(5){left:78%;top:-90px;animation-delay:-7s}.confetti i:nth-child(6){left:91%;top:-60px;animation-delay:-3s}
+@keyframes fall{0%{transform:translateY(-5vh) rotate(0)}100%{transform:translateY(115vh) rotate(600deg)}}
+.wrap{width:min(100% - 32px,760px);margin:auto;padding:28px 0 38px}
+.hero{text-align:center;padding:8px 8px 24px;position:relative}
+.crown{font-size:clamp(28px,5vw,42px);filter:drop-shadow(0 0 14px #ffd85a);animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+.year{font-size:clamp(64px,15vw,112px);line-height:.95;font-weight:1000;letter-spacing:-.07em;
+background:linear-gradient(180deg,#fff8a5 0%,#ffcf39 42%,#ff6b23 75%,#ff357f 100%);color:transparent;background-clip:text;
+-webkit-background-clip:text;text-shadow:0 7px 0 #8a2b5c55,0 0 36px #ff6a2480}
+.brand{font-size:clamp(22px,5vw,39px);font-weight:950;letter-spacing:.12em;margin:8px 0 0;text-shadow:0 0 24px #16d9ff65}
+.brand span{color:var(--cyan)}
+.headline{margin:8px auto 0;font-size:clamp(28px,7vw,55px);font-weight:1000;font-style:italic;letter-spacing:-.045em;line-height:1.08;
+background:linear-gradient(90deg,#ffec70,#ff9d31,#ff34bc,#8e62ff,#16d9ff);color:transparent;background-clip:text;-webkit-background-clip:text;
+filter:drop-shadow(0 5px 0 #33165c)}
+.tagline{margin:16px 0 0;color:#e0e8ff;font-size:12px;font-weight:750;letter-spacing:.22em;text-transform:uppercase}
+.tagline:before,.tagline:after{content:"";display:inline-block;width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan));vertical-align:middle;margin:0 10px}
+.tagline:after{background:linear-gradient(90deg,var(--pink),transparent)}
+.card{position:relative;isolation:isolate;color:var(--ink);padding:clamp(22px,5vw,38px);border-radius:clamp(22px,5vw,34px);
+background:linear-gradient(145deg,#fff 0%,#f2f1ff 62%,#fff0fc 100%);border:1px solid #fff;box-shadow:0 0 0 1px #91a4ff55,0 22px 70px #020725a8,0 0 36px #6b39ff35}
+.card:before{content:"";position:absolute;inset:-2px;z-index:-1;border-radius:inherit;padding:2px;background:linear-gradient(130deg,#fff,#b64aff,#20dfff,#ff3ec9,#fff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.8}
+.cardhead{display:flex;align-items:center;gap:16px;margin-bottom:26px}
+.avatar{flex:0 0 68px;width:68px;height:68px;display:grid;place-items:center;border-radius:22px;color:white;font-size:30px;
+background:linear-gradient(145deg,#ff25c8,#7b22ff 70%);box-shadow:0 0 0 5px #e8d8ff,0 0 28px #d62aff75;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 5px #e8d8ff,0 0 20px #d62aff55}50%{box-shadow:0 0 0 7px #f5dcff,0 0 35px #d62aff95}}
+h2{font-size:clamp(24px,5vw,32px);line-height:1.1;margin:0 0 8px;font-weight:900;letter-spacing:-.035em}
+.sub{color:#606b9a;font-size:15px;line-height:1.55;margin:0}
+.field{margin:18px 0 0}
+label{display:block;font-size:13px;font-weight:850;margin:0 0 8px;color:#263064}
+.inputwrap{display:flex;align-items:center;gap:12px;padding:0 15px;border:1.5px solid #c9c7fa;border-radius:17px;background:#ffffffd9;box-shadow:0 5px 13px #7464d916;transition:.2s}
+.inputwrap:focus-within{border-color:#a53dff;box-shadow:0 0 0 4px #b66bff25,0 8px 20px #7464d91b;transform:translateY(-1px)}
+.inputicon{font-size:23px;flex:0 0 auto}
+input[type=text],input[type=tel]{width:100%;min-width:0;border:0;outline:0;background:transparent;padding:17px 0;font:inherit;font-size:16px;color:var(--ink)}
+input::placeholder{color:#8992b7}
+.consent{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0;color:#202958;font-size:14px;line-height:1.55}
+.consent input{width:21px;height:21px;accent-color:#8d2cff;flex:0 0 auto;margin:2px 0 0}
+.privacy{font-size:12px;color:#6d769b;line-height:1.5;margin:12px 0 0}
+.cta{width:100%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:14px;min-height:72px;margin-top:24px;padding:17px 20px;border:1px solid #ffb7f7;border-radius:20px;color:#fff;
+font-size:clamp(18px,4.5vw,25px);font-weight:950;letter-spacing:-.02em;background:linear-gradient(100deg,#ff4c29 0%,#ff159f 36%,#9c16ed 72%,#402bff 100%);
+box-shadow:0 8px 0 #5914b2,0 14px 30px #8d21ff45,inset 0 2px 2px #ffffff70;cursor:pointer;transition:transform .18s,filter .18s}
+.cta:before{content:"";position:absolute;top:-60%;left:-35%;width:25%;height:220%;transform:rotate(25deg);background:#ffffff45;filter:blur(8px);animation:shine 3.8s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-35%}100%{left:125%}}
+.cta:hover{filter:saturate(1.18) brightness(1.05);transform:translateY(-2px)}.cta:active{transform:translateY(4px);box-shadow:0 4px 0 #5914b2,0 8px 20px #8d21ff45}
+.cta:disabled{opacity:.55;cursor:not-allowed}
+.gift{font-size:29px;filter:drop-shadow(0 2px 5px #4a075a)}
+.arrow{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ffffff25;border:1px solid #ffffff60;font-size:28px}
+.message{min-height:22px;margin-top:12px;text-align:center;font-weight:750;font-size:14px;color:#b42318}
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:32px 0 28px}
+.feature{text-align:center;padding:12px 6px;color:#f4f6ff;font-size:14px;font-weight:800;line-height:1.35}
+.featureicon{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 10px;border-radius:50%;font-size:28px;border:1px solid currentColor;background:#ffffff08;box-shadow:0 0 20px #693bff30}
+.feature:nth-child(1) .featureicon{color:var(--gold);box-shadow:0 0 25px #ffd85a32}.feature:nth-child(2) .featureicon{color:#ff55d2;box-shadow:0 0 25px #ff55d232}.feature:nth-child(3) .featureicon{color:var(--cyan);box-shadow:0 0 25px #16d9ff32}
+.divider{height:1px;background:linear-gradient(90deg,transparent,#5364b8,transparent);margin:0 auto 20px;max-width:420px}
+footer{text-align:center;color:#aeb8e9;font-size:11px;letter-spacing:.22em;line-height:1.8;padding:0 10px}
+.footericon{font-size:25px;color:var(--gold);margin-bottom:4px;filter:drop-shadow(0 0 10px #ffd85a80)}
+.hidden{display:none!important}
+.gamecard{text-align:center;margin-top:20px}
+.wheelwrap{position:relative;width:min(70vw,300px);margin:25px auto 15px}
+.pointer{position:absolute;z-index:2;top:-13px;left:50%;transform:translateX(-50%);font-size:32px;color:#ff4eac;text-shadow:0 2px 0 white}
+.wheel{width:100%;aspect-ratio:1;border:8px solid #fff;border-radius:50%;background:conic-gradient(#ff5c45 0 45deg,#ffd64c 45deg 90deg,#19c7b5 90deg 135deg,#4a8dff 135deg 180deg,#a05cff 180deg 225deg,#ff4ba6 225deg 270deg,#5cd68b 270deg 315deg,#ff9f43 315deg 360deg);box-shadow:0 0 0 4px #191b69,0 0 35px #8b39ff75;transition:transform 4s cubic-bezier(.12,.7,.15,1)}
+.wheel:after{content:"SPIN";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:72px;height:72px;border:5px solid #20276c;border-radius:50%;background:white;color:#20276c;font-weight:1000}
+.result{font-size:19px;font-weight:900;color:#7020cb;min-height:30px}
+.secondary{border:1px solid #d8c5ff;background:#f1e9ff;color:#5020a8;border-radius:13px;padding:13px 18px;font-weight:850;cursor:pointer}
+@media(max-width:480px){
+ .wrap{width:min(100% - 22px,760px);padding-top:20px}.hero{padding-bottom:20px}
+ .card{padding:22px 17px;border-radius:24px}.cardhead{gap:13px;margin-bottom:21px}
+ .avatar{width:54px;height:54px;flex-basis:54px;border-radius:17px;font-size:25px}
+ .sub{font-size:14px}.inputwrap{border-radius:14px;padding:0 12px}input[type=text],input[type=tel]{padding:16px 0;font-size:16px}
+ .consent{font-size:13px;gap:10px}.cta{min-height:65px;border-radius:17px;gap:10px;padding:14px 12px}
+ .features{gap:4px;margin-top:26px}.feature{font-size:12px;padding:8px 2px}.featureicon{width:54px;height:54px;font-size:24px}
+ .tagline{font-size:10px;letter-spacing:.13em}.tagline:before,.tagline:after{margin:0 5px;width:15px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
-<body><main class="wrap">
-<header class="brand"><div class="year">2029</div><h1>THINETH · SPIN & WIN</h1><p>Register · Spin the wheel · Have fun</p></header>
-<section id="register" class="panel">
-<h2>🎯 Student Registration</h2><p>Enter your details to unlock the game.</p>
-<form id="regForm">
-<label for="name">Full name</label><input id="name" name="name" autocomplete="name" required maxlength="100" placeholder="Your full name">
-<label for="phone">WhatsApp number</label><input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="20" placeholder="e.g. 07XXXXXXXX">
-<label class="check"><input id="consent" type="checkbox" required><span>I agree to register for the game.</span></label>
-<p class="fine">Please enter a number you control. Do not submit someone else's contact details. Ask a parent/guardian if you are under 18. This starter version stores entries only in this browser; it does not send them to an online admin dashboard.</p>
-<div id="regError" class="error"></div><button type="submit">Register & Play →</button>
-</form></section>
-<section id="game" class="panel hidden"><h2>🎡 Spin the Wheel</h2><p id="welcome"></p><div class="wheelarea"><div class="pointer">▼</div><div id="wheel" class="wheel"></div></div><button id="spinBtn">SPIN NOW</button><div id="result" class="status" aria-live="polite"></div><button id="againBtn" class="secondary hidden">Spin again</button><button id="backBtn" class="secondary">Back to registration</button></section>
-<section id="adminLogin" class="panel"><h2>🔐 Demo Admin Dashboard</h2><p class="fine">Demo-only view. This local password is not secure and must not be used for a public launch.</p><label for="adminPass">Demo password</label><input id="adminPass" type="password" placeholder="Enter demo password"><button id="loginBtn">Open dashboard</button><div id="adminError" class="error"></div></section>
-<section id="dashboard" class="panel hidden"><div class="adminbar"><div><h2>📋 Registered Students</h2><p class="fine">Records saved in this browser only.</p></div><button id="exportBtn">Export CSV</button></div><p id="count" class="pill"></p><div class="tablewrap"><table><thead><tr><th>Name</th><th>WhatsApp</th><th>Registered</th><th>Consent</th></tr></thead><tbody id="records"></tbody></table></div><button class="secondary" id="logoutBtn">Close dashboard</button></section>
-<footer class="foot">Thineth Higher Educational Institute</footer>
+<body>
+<div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<main class="wrap">
+<header class="hero">
+  <div class="crown" aria-hidden="true">♛</div>
+  <div class="year">2029</div>
+  <div class="brand">THINETH</div>
+  <div class="headline">SPIN &amp; WIN</div>
+  <p class="tagline">REGISTER · SPIN · WIN · HAVE FUN</p>
+</header>
+
+<section class="card" id="registration">
+  <div class="cardhead">
+    <div class="avatar" aria-hidden="true">♙</div>
+    <div><h2>Register to Play</h2><p class="sub">Enter your details to spin the wheel and discover your surprise!</p></div>
+  </div>
+  <form id="registrationForm" novalidate>
+    <div class="field">
+      <label for="studentName">YOUR FULL NAME</label>
+      <div class="inputwrap"><span class="inputicon" aria-hidden="true">♙</span><input id="studentName" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Enter your full name" required></div>
+    </div>
+    <div class="field">
+      <label for="whatsapp">WHATSAPP NUMBER</label>
+      <div class="inputwrap"><span class="inputicon" aria-hidden="true">🟢</span><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="e.g. 07XXXXXXXX" required></div>
+    </div>
+    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to register for the game. I understand that my details will be used for this activity and that the organiser may contact me on WhatsApp for the stated purpose.</span></label>
+    <p class="privacy">Please enter your own contact number. Your details should be handled securely by the organiser. If you are under 18, ask a parent or guardian before registering.</p>
+    <button class="cta" type="submit"><span class="gift" aria-hidden="true">🎁</span><span>Register &amp; Play</span><span class="arrow" aria-hidden="true">›</span></button>
+    <div class="message" id="formMessage" aria-live="polite"></div>
+  </form>
+</section>
+
+<section class="card gamecard hidden" id="game" aria-live="polite">
+  <h2>🎡 Spin the Wheel!</h2><p class="sub" id="welcome">Good luck!</p>
+  <div class="wheelwrap"><div class="pointer">▼</div><div class="wheel" id="wheel"></div></div>
+  <button class="cta" type="button" id="spinButton"><span class="gift">🎁</span><span>SPIN NOW</span><span class="arrow">›</span></button>
+  <p class="result" id="result"></p>
+  <button class="secondary hidden" id="againButton" type="button">Spin again</button>
+</section>
+
+<div class="features" aria-label="Game highlights">
+  <div class="feature"><div class="featureicon">⚡</div>Quick<br>Registration</div>
+  <div class="feature"><div class="featureicon">🎁</div>Spin the<br>Wheel</div>
+  <div class="feature"><div class="featureicon">★</div>Surprise<br>Moment</div>
+</div>
+<div class="divider"></div>
+<footer><div class="footericon">♛</div>THINETH HIGHER EDUCATIONAL INSTITUTE</footer>
 </main>
 <script>
-const KEY='thineth2029_demo_registrations';
-const $=id=>document.getElementById(id);
-const getRows=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}};
-function show(id){['register','game','dashboard'].forEach(x=>$(x).classList.toggle('hidden',x!==id));}
-$('regForm').addEventListener('submit',e=>{
- e.preventDefault(); const name=$('name').value.trim(), phone=$('phone').value.trim();
- if(name.length<2){$('regError').textContent='Please enter your full name.';return}
- if(!/^[+0-9 ()-]{7,20}$/.test(phone)){ $('regError').textContent='Please enter a valid WhatsApp number.';return}
- if(!$('consent').checked){$('regError').textContent='Please confirm consent to continue.';return}
- const rows=getRows(); const row={name,phone,registered:new Date().toLocaleString(),consent:true};
- rows.push(row);localStorage.setItem(KEY,JSON.stringify(rows)); sessionStorage.setItem('thinethCurrentName',name);
- $('welcome').textContent='Good luck, '+name+'! Tap the button to spin.';$('result').textContent='';$('wheel').style.transform='rotate(0deg)';$('againBtn').classList.add('hidden');$('regError').textContent='';show('game');
+const STORAGE_KEY = "thineth_spin_game_demo_entries";
+const form = document.getElementById("registrationForm");
+const message = document.getElementById("formMessage");
+const registration = document.getElementById("registration");
+const game = document.getElementById("game");
+const nameInput = document.getElementById("studentName");
+const phoneInput = document.getElementById("whatsapp");
+const consentInput = document.getElementById("consent");
+const wheel = document.getElementById("wheel");
+let spinning = false;
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  if (name.length < 2) { message.textContent = "Please enter your full name."; nameInput.focus(); return; }
+  if (!/^[+0-9 ()-]{7,20}$/.test(phone)) { message.textContent = "Please enter a valid WhatsApp number."; phoneInput.focus(); return; }
+  if (!consentInput.checked) { message.textContent = "Please confirm your consent to continue."; return; }
+
+  // DEMO ONLY: saved to this visitor's browser, not to a central admin dashboard.
+  // Connect a secure backend before collecting real student information.
+  try {
+    const entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    entries.push({ name, phone, consent: true, createdAt: new Date().toISOString() });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  } catch (error) { /* Continue the demo if browser storage is unavailable. */ }
+
+  document.getElementById("welcome").textContent = "Good luck, " + name + "! Tap below and see what the wheel brings.";
+  message.textContent = "";
+  registration.classList.add("hidden");
+  game.classList.remove("hidden");
+  game.scrollIntoView({ behavior: "smooth", block: "start" });
 });
-let spinning=false;
-$('spinBtn').addEventListener('click',()=>{if(spinning)return;spinning=true;$('spinBtn').disabled=true;$('result').textContent='Spinning…';const deg=1800+Math.floor(Math.random()*1800);$('wheel').style.transform='rotate('+deg+'deg)';setTimeout(()=>{const prizes=['Great effort! Try again next time','Bonus points: 10','You are a lucky star!','Keep learning — surprise unlocked','Bonus points: 5','Amazing! Share your result with a friend'];const p=prizes[Math.floor(Math.random()*prizes.length)];$('result').textContent='🎉 '+p+'!';$('spinBtn').disabled=false;$('againBtn').classList.remove('hidden');spinning=false;},4100)});
-$('againBtn').addEventListener('click',()=>{$('wheel').style.transform='rotate(0deg)';$('result').textContent='Ready? Spin again!'});
-$('backBtn').addEventListener('click',()=>show('register'));
-$('loginBtn').addEventListener('click',()=>{if($('adminPass').value==='thineth-demo-2029'){renderRows();$('adminLogin').classList.add('hidden');$('dashboard').classList.remove('hidden');$('adminError').textContent=''}else $('adminError').textContent='Incorrect demo password. (Demo password is listed in README.)'});
-function renderRows(){const rows=getRows();$('count').textContent=rows.length+' registrations';$('records').innerHTML='';rows.slice().reverse().forEach(r=>{const tr=document.createElement('tr');[r.name,r.phone,r.registered,r.consent?'Yes':'No'].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});$('records').appendChild(tr)})}
-$('exportBtn').addEventListener('click',()=>{const rows=getRows();const esc=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const csv=[['Name','WhatsApp','Registered','Consent'],...rows.map(r=>[r.name,r.phone,r.registered,r.consent?'Yes':'No'])].map(r=>r.map(esc).join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='thineth-2029-registrations.csv';a.click();URL.revokeObjectURL(a.href)});
-$('logoutBtn').addEventListener('click',()=>{$('dashboard').classList.add('hidden');$('adminLogin').classList.remove('hidden');$('adminPass').value=''});
-</script></body></html>
+
+document.getElementById("spinButton").addEventListener("click", function () {
+  if (spinning) return;
+  spinning = true;
+  this.disabled = true;
+  document.getElementById("result").textContent = "Spinning...";
+  document.getElementById("againButton").classList.add("hidden");
+  const degrees = 1800 + Math.floor(Math.random() * 1800);
+  wheel.style.transform = "rotate(" + degrees + "deg)";
+  window.setTimeout(() => {
+    const prizes = [
+      "✨ Surprise unlocked!",
+      "🎉 You're a lucky star!",
+      "⭐ Amazing energy!",
+      "🎁 A little moment of joy!",
+      "💫 Keep shining!",
+      "🌟 Thanks for playing!"
+    ];
+    document.getElementById("result").textContent = prizes[Math.floor(Math.random() * prizes.length)];
+    document.getElementById("againButton").classList.remove("hidden");
+    document.getElementById("spinButton").disabled = false;
+    spinning = false;
+  }, 4100);
+});
+document.getElementById("againButton").addEventListener("click", () => {
+  wheel.style.transition = "none";
+  wheel.style.transform = "rotate(0deg)";
+  void wheel.offsetWidth;
+  wheel.style.transition = "";
+  document.getElementById("result").textContent = "";
+  document.getElementById("againButton").classList.add("hidden");
+});
+</script>
+</body>
+</html>
