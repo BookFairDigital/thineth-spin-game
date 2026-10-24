@@ -1,0 +1,6 @@
+QR integration notes
+
+The uploaded PDF is a one-page A/L Technology flyer. Its existing QR code is at the lower-left corner.
+Do not generate the final QR until the website has a stable public HTTPS URL.
+The final QR should point to the registration page (for example, https://your-domain.example/), not directly to an admin page.
+After hosting and testing, replace only the existing QR area on page 1 and preserve the surrounding green Sinhala copy and the rest of the design.

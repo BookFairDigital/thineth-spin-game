@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thineth | 2029 A/L Spin & Win</title>
+<style>
+:root{--navy:#142b57;--orange:#f4774f;--green:#1e9e68;--paper:#f7f8fc;--ink:#17233b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#132957,#1f3d75);font-family:Arial,sans-serif;color:var(--ink);min-height:100vh}
+.wrap{max-width:760px;margin:auto;padding:24px 16px 48px}.brand{color:white;text-align:center;margin:8px 0 20px}.brand .year{font-size:clamp(42px,10vw,76px);font-weight:900;color:var(--orange);letter-spacing:-3px}.brand h1{margin:0;font-size:clamp(20px,5vw,30px)}.brand p{margin:7px 0;color:#dce6ff}
+.panel{background:white;border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 18px 55px #08132d66;margin:16px 0}.hidden{display:none!important}label{display:block;font-weight:700;font-size:14px;margin:14px 0 7px}input{width:100%;padding:14px;border:1px solid #cdd4e1;border-radius:11px;font-size:16px}button{border:0;border-radius:12px;padding:14px 18px;font-size:16px;font-weight:800;cursor:pointer;background:var(--green);color:white;width:100%;margin-top:14px}button.secondary{background:#e9eef8;color:var(--navy)}.fine{font-size:12px;line-height:1.5;color:#68748a}.check{display:flex;gap:9px;align-items:flex-start;margin-top:14px;font-size:13px;line-height:1.45}.check input{width:auto;margin-top:3px}.wheelarea{display:grid;place-items:center;gap:12px}.wheel{width:min(74vw,310px);height:min(74vw,310px);border-radius:50%;border:8px solid #fff;outline:4px solid var(--navy);position:relative;background:conic-gradient(#f4774f 0 45deg,#f8c44f 45deg 90deg,#36a4a2 90deg 135deg,#779bca 135deg 180deg,#9e69b6 180deg 225deg,#ee5c75 225deg 270deg,#6abf82 270deg 315deg,#f3a64d 315deg 360deg);transition:transform 4s cubic-bezier(.12,.7,.15,1)}.wheel:after{content:"SPIN";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;border:5px solid var(--navy);border-radius:50%;width:72px;height:72px;display:grid;place-items:center;font-weight:900;color:var(--navy)}.pointer{font-size:32px;line-height:1;margin-bottom:-24px;z-index:1;color:var(--orange);text-shadow:0 2px 0 white}.status{text-align:center;font-weight:700;margin-top:10px}.adminbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.adminbar button{width:auto;margin:0}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid #e6eaf1;white-space:nowrap}th{background:#f1f4fa}.pill{display:inline-block;background:#e4f7ed;color:#117246;border-radius:20px;padding:5px 9px;font-size:12px;font-weight:700}.error{color:#b42318;font-size:13px}.foot{text-align:center;color:#dce6ff;font-size:12px;margin-top:22px}
+</style>
+</head>
+<body><main class="wrap">
+<header class="brand"><div class="year">2029</div><h1>THINETH · A/L SPIN & WIN</h1><p>Register · Spin the wheel · Have fun</p></header>
+<section id="register" class="panel">
+<h2>🎯 Student Registration</h2><p>Enter your details to unlock the game.</p>
+<form id="regForm">
+<label for="name">Full name</label><input id="name" name="name" autocomplete="name" required maxlength="100" placeholder="Your full name">
+<label for="phone">WhatsApp number</label><input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="20" placeholder="e.g. 07XXXXXXXX">
+<label class="check"><input id="consent" type="checkbox" required><span>I agree to register for the game. I understand that Thineth will store these details for this activity and may contact me on WhatsApp only for the purpose described by the organiser.</span></label>
+<p class="fine">Please enter a number you control. Do not submit someone else's contact details. Ask a parent/guardian if you are under 18. This starter version stores entries only in this browser; it does not send them to an online admin dashboard.</p>
+<div id="regError" class="error"></div><button type="submit">Register & Play →</button>
+</form></section>
+<section id="game" class="panel hidden"><h2>🎡 Spin the Wheel</h2><p id="welcome"></p><div class="wheelarea"><div class="pointer">▼</div><div id="wheel" class="wheel"></div></div><button id="spinBtn">SPIN NOW</button><div id="result" class="status" aria-live="polite"></div><button id="againBtn" class="secondary hidden">Spin again</button><button id="backBtn" class="secondary">Back to registration</button></section>
+<section id="adminLogin" class="panel"><h2>🔐 Demo Admin Dashboard</h2><p class="fine">Demo-only view. This local password is not secure and must not be used for a public launch.</p><label for="adminPass">Demo password</label><input id="adminPass" type="password" placeholder="Enter demo password"><button id="loginBtn">Open dashboard</button><div id="adminError" class="error"></div></section>
+<section id="dashboard" class="panel hidden"><div class="adminbar"><div><h2>📋 Registered Students</h2><p class="fine">Records saved in this browser only.</p></div><button id="exportBtn">Export CSV</button></div><p id="count" class="pill"></p><div class="tablewrap"><table><thead><tr><th>Name</th><th>WhatsApp</th><th>Registered</th><th>Consent</th></tr></thead><tbody id="records"></tbody></table></div><button class="secondary" id="logoutBtn">Close dashboard</button></section>
+<footer class="foot">Thineth Higher Educational Institute · 2029 A/L</footer>
+</main>
+<script>
+const KEY='thineth2029_demo_registrations';
+const $=id=>document.getElementById(id);
+const getRows=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}};
+function show(id){['register','game','dashboard'].forEach(x=>$(x).classList.toggle('hidden',x!==id));}
+$('regForm').addEventListener('submit',e=>{
+ e.preventDefault(); const name=$('name').value.trim(), phone=$('phone').value.trim();
+ if(name.length<2){$('regError').textContent='Please enter your full name.';return}
+ if(!/^[+0-9 ()-]{7,20}$/.test(phone)){ $('regError').textContent='Please enter a valid WhatsApp number.';return}
+ if(!$('consent').checked){$('regError').textContent='Please confirm consent to continue.';return}
+ const rows=getRows(); const row={name,phone,registered:new Date().toLocaleString(),consent:true};
+ rows.push(row);localStorage.setItem(KEY,JSON.stringify(rows)); sessionStorage.setItem('thinethCurrentName',name);
+ $('welcome').textContent='Good luck, '+name+'! Tap the button to spin.';$('result').textContent='';$('wheel').style.transform='rotate(0deg)';$('againBtn').classList.add('hidden');$('regError').textContent='';show('game');
+});
+let spinning=false;
+$('spinBtn').addEventListener('click',()=>{if(spinning)return;spinning=true;$('spinBtn').disabled=true;$('result').textContent='Spinning…';const deg=1800+Math.floor(Math.random()*1800);$('wheel').style.transform='rotate('+deg+'deg)';setTimeout(()=>{const prizes=['Great effort! Try again next time','Bonus points: 10','You are a lucky star!','Keep learning — surprise unlocked','Bonus points: 5','Amazing! Share your result with a friend'];const p=prizes[Math.floor(Math.random()*prizes.length)];$('result').textContent='🎉 '+p+'!';$('spinBtn').disabled=false;$('againBtn').classList.remove('hidden');spinning=false;},4100)});
+$('againBtn').addEventListener('click',()=>{$('wheel').style.transform='rotate(0deg)';$('result').textContent='Ready? Spin again!'});
+$('backBtn').addEventListener('click',()=>show('register'));
+$('loginBtn').addEventListener('click',()=>{if($('adminPass').value==='thineth-demo-2029'){renderRows();$('adminLogin').classList.add('hidden');$('dashboard').classList.remove('hidden');$('adminError').textContent=''}else $('adminError').textContent='Incorrect demo password. (Demo password is listed in README.)'});
+function renderRows(){const rows=getRows();$('count').textContent=rows.length+' registrations';$('records').innerHTML='';rows.slice().reverse().forEach(r=>{const tr=document.createElement('tr');[r.name,r.phone,r.registered,r.consent?'Yes':'No'].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});$('records').appendChild(tr)})}
+$('exportBtn').addEventListener('click',()=>{const rows=getRows();const esc=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const csv=[['Name','WhatsApp','Registered','Consent'],...rows.map(r=>[r.name,r.phone,r.registered,r.consent?'Yes':'No'])].map(r=>r.map(esc).join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='thineth-2029-registrations.csv';a.click();URL.revokeObjectURL(a.href)});
+$('logoutBtn').addEventListener('click',()=>{$('dashboard').classList.add('hidden');$('adminLogin').classList.remove('hidden');$('adminPass').value=''});
+</script></body></html>
