@@ -120,7 +120,7 @@ footer{text-align:center;color:#aeb8e9;font-size:11px;letter-spacing:.22em;line-
       <label for="whatsapp">WHATSAPP NUMBER</label>
       <div class="inputwrap"><span class="inputicon" aria-hidden="true">🟢</span><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="e.g. 07XXXXXXXX" required></div>
     </div>
-    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to register for the game. </span></label>
+    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to register for the game. I understand that my details will be used for this activity and that the organiser may contact me on WhatsApp for the stated purpose.</span></label>
     <p class="privacy">Please enter your own contact number. Your details should be handled securely by the organiser. If you are under 18, ask a parent or guardian before registering.</p>
     <button class="cta" type="submit"><span class="gift" aria-hidden="true">🎁</span><span>Register &amp; Play</span><span class="arrow" aria-hidden="true">›</span></button>
     <div class="message" id="formMessage" aria-live="polite"></div>
@@ -143,8 +143,11 @@ footer{text-align:center;color:#aeb8e9;font-size:11px;letter-spacing:.22em;line-
 <div class="divider"></div>
 <footer><div class="footericon">♛</div>THINETH HIGHER EDUCATIONAL INSTITUTE</footer>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const STORAGE_KEY = "thineth_spin_game_demo_entries";
+const SUPABASE_URL = "https://wvyerpzzqljthfgofcgc.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4W_d2ka7IakSo6ASSbFI_g_QAiaxCrL";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const form = document.getElementById("registrationForm");
 const message = document.getElementById("formMessage");
 const registration = document.getElementById("registration");
@@ -155,7 +158,7 @@ const consentInput = document.getElementById("consent");
 const wheel = document.getElementById("wheel");
 let spinning = false;
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
   event.preventDefault();
   const name = nameInput.value.trim();
   const phone = phoneInput.value.trim();
@@ -163,19 +166,27 @@ form.addEventListener("submit", function (event) {
   if (!/^[+0-9 ()-]{7,20}$/.test(phone)) { message.textContent = "Please enter a valid WhatsApp number."; phoneInput.focus(); return; }
   if (!consentInput.checked) { message.textContent = "Please confirm your consent to continue."; return; }
 
-  // DEMO ONLY: saved to this visitor's browser, not to a central admin dashboard.
-  // Connect a secure backend before collecting real student information.
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  message.style.color = "#5b21b6";
+  message.textContent = "Registering securely...";
   try {
-    const entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    entries.push({ name, phone, consent: true, createdAt: new Date().toISOString() });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-  } catch (error) { /* Continue the demo if browser storage is unavailable. */ }
-
-  document.getElementById("welcome").textContent = "Good luck, " + name + "! Tap below and see what the wheel brings.";
-  message.textContent = "";
-  registration.classList.add("hidden");
-  game.classList.remove("hidden");
-  game.scrollIntoView({ behavior: "smooth", block: "start" });
+    const { error } = await supabaseClient
+      .from("student_registrations")
+      .insert({ full_name: name, whatsapp_number: phone });
+    if (error) throw error;
+    document.getElementById("welcome").textContent = "Good luck, " + name + "! Tap below and see what the wheel brings.";
+    message.textContent = "";
+    registration.classList.add("hidden");
+    game.classList.remove("hidden");
+    game.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (error) {
+    console.error("Registration failed:", error);
+    message.style.color = "#b42318";
+    message.textContent = "Registration could not be saved. Please check your connection and try again.";
+  } finally {
+    submitButton.disabled = false;
+  }
 });
 
 document.getElementById("spinButton").addEventListener("click", function () {
