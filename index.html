@@ -1,225 +1,76 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#070d38">
-<title>Thineth | Spin & Win</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080e35"><title>Thineth | Play & Win</title>
 <style>
-:root{
-  --night:#070d38;--navy:#101957;--purple:#7c2cff;--pink:#ff26b7;
-  --cyan:#16d9ff;--gold:#ffd85a;--ink:#101849;--muted:#68739d;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;color:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:radial-gradient(ellipse at 50% 0%,#252d82 0%,#11194f 35%,var(--night) 75%);overflow-x:hidden}
-body:before,body:after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(2px);opacity:.55}
-body:before{width:340px;height:340px;top:10%;left:-230px;background:radial-gradient(circle,#1b76ff,transparent 70%)}
-body:after{width:380px;height:380px;right:-260px;top:38%;background:radial-gradient(circle,#9a19ff,transparent 70%)}
-.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
-.confetti i{position:absolute;width:8px;height:15px;border-radius:2px;background:var(--pink);opacity:.8;animation:fall 9s linear infinite}
-.confetti i:nth-child(3n){background:var(--cyan)}.confetti i:nth-child(4n){background:var(--gold)}
-.confetti i:nth-child(1){left:8%;top:-20px;animation-delay:-1s}.confetti i:nth-child(2){left:21%;top:-80px;animation-delay:-4s}
-.confetti i:nth-child(3){left:37%;top:-50px;animation-delay:-6s}.confetti i:nth-child(4){left:61%;top:-10px;animation-delay:-2s}
-.confetti i:nth-child(5){left:78%;top:-90px;animation-delay:-7s}.confetti i:nth-child(6){left:91%;top:-60px;animation-delay:-3s}
-@keyframes fall{0%{transform:translateY(-5vh) rotate(0)}100%{transform:translateY(115vh) rotate(600deg)}}
-.wrap{width:min(100% - 32px,760px);margin:auto;padding:28px 0 38px}
-.hero{text-align:center;padding:8px 8px 24px;position:relative}
-.crown{font-size:clamp(28px,5vw,42px);filter:drop-shadow(0 0 14px #ffd85a);animation:bob 2.6s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
-.year{font-size:clamp(64px,15vw,112px);line-height:.95;font-weight:1000;letter-spacing:-.07em;
-background:linear-gradient(180deg,#fff8a5 0%,#ffcf39 42%,#ff6b23 75%,#ff357f 100%);color:transparent;background-clip:text;
--webkit-background-clip:text;text-shadow:0 7px 0 #8a2b5c55,0 0 36px #ff6a2480}
-.brand{font-size:clamp(22px,5vw,39px);font-weight:950;letter-spacing:.12em;margin:8px 0 0;text-shadow:0 0 24px #16d9ff65}
-.brand span{color:var(--cyan)}
-.headline{margin:8px auto 0;font-size:clamp(28px,7vw,55px);font-weight:1000;font-style:italic;letter-spacing:-.045em;line-height:1.08;
-background:linear-gradient(90deg,#ffec70,#ff9d31,#ff34bc,#8e62ff,#16d9ff);color:transparent;background-clip:text;-webkit-background-clip:text;
-filter:drop-shadow(0 5px 0 #33165c)}
-.tagline{margin:16px 0 0;color:#e0e8ff;font-size:12px;font-weight:750;letter-spacing:.22em;text-transform:uppercase}
-.tagline:before,.tagline:after{content:"";display:inline-block;width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan));vertical-align:middle;margin:0 10px}
-.tagline:after{background:linear-gradient(90deg,var(--pink),transparent)}
-.card{position:relative;isolation:isolate;color:var(--ink);padding:clamp(22px,5vw,38px);border-radius:clamp(22px,5vw,34px);
-background:linear-gradient(145deg,#fff 0%,#f2f1ff 62%,#fff0fc 100%);border:1px solid #fff;box-shadow:0 0 0 1px #91a4ff55,0 22px 70px #020725a8,0 0 36px #6b39ff35}
-.card:before{content:"";position:absolute;inset:-2px;z-index:-1;border-radius:inherit;padding:2px;background:linear-gradient(130deg,#fff,#b64aff,#20dfff,#ff3ec9,#fff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.8}
-.cardhead{display:flex;align-items:center;gap:16px;margin-bottom:26px}
-.avatar{flex:0 0 68px;width:68px;height:68px;display:grid;place-items:center;border-radius:22px;color:white;font-size:30px;
-background:linear-gradient(145deg,#ff25c8,#7b22ff 70%);box-shadow:0 0 0 5px #e8d8ff,0 0 28px #d62aff75;animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 5px #e8d8ff,0 0 20px #d62aff55}50%{box-shadow:0 0 0 7px #f5dcff,0 0 35px #d62aff95}}
-h2{font-size:clamp(24px,5vw,32px);line-height:1.1;margin:0 0 8px;font-weight:900;letter-spacing:-.035em}
-.sub{color:#606b9a;font-size:15px;line-height:1.55;margin:0}
-.field{margin:18px 0 0}
-label{display:block;font-size:13px;font-weight:850;margin:0 0 8px;color:#263064}
-.inputwrap{display:flex;align-items:center;gap:12px;padding:0 15px;border:1.5px solid #c9c7fa;border-radius:17px;background:#ffffffd9;box-shadow:0 5px 13px #7464d916;transition:.2s}
-.inputwrap:focus-within{border-color:#a53dff;box-shadow:0 0 0 4px #b66bff25,0 8px 20px #7464d91b;transform:translateY(-1px)}
-.inputicon{font-size:23px;flex:0 0 auto}
-input[type=text],input[type=tel]{width:100%;min-width:0;border:0;outline:0;background:transparent;padding:17px 0;font:inherit;font-size:16px;color:var(--ink)}
-input::placeholder{color:#8992b7}
-.consent{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0;color:#202958;font-size:14px;line-height:1.55}
-.consent input{width:21px;height:21px;accent-color:#8d2cff;flex:0 0 auto;margin:2px 0 0}
-.privacy{font-size:12px;color:#6d769b;line-height:1.5;margin:12px 0 0}
-.cta{width:100%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:14px;min-height:72px;margin-top:24px;padding:17px 20px;border:1px solid #ffb7f7;border-radius:20px;color:#fff;
-font-size:clamp(18px,4.5vw,25px);font-weight:950;letter-spacing:-.02em;background:linear-gradient(100deg,#ff4c29 0%,#ff159f 36%,#9c16ed 72%,#402bff 100%);
-box-shadow:0 8px 0 #5914b2,0 14px 30px #8d21ff45,inset 0 2px 2px #ffffff70;cursor:pointer;transition:transform .18s,filter .18s}
-.cta:before{content:"";position:absolute;top:-60%;left:-35%;width:25%;height:220%;transform:rotate(25deg);background:#ffffff45;filter:blur(8px);animation:shine 3.8s ease-in-out infinite}
-@keyframes shine{0%,55%{left:-35%}100%{left:125%}}
-.cta:hover{filter:saturate(1.18) brightness(1.05);transform:translateY(-2px)}.cta:active{transform:translateY(4px);box-shadow:0 4px 0 #5914b2,0 8px 20px #8d21ff45}
-.cta:disabled{opacity:.55;cursor:not-allowed}
-.gift{font-size:29px;filter:drop-shadow(0 2px 5px #4a075a)}
-.arrow{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ffffff25;border:1px solid #ffffff60;font-size:28px}
-.message{min-height:22px;margin-top:12px;text-align:center;font-weight:750;font-size:14px;color:#b42318}
-.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:32px 0 28px}
-.feature{text-align:center;padding:12px 6px;color:#f4f6ff;font-size:14px;font-weight:800;line-height:1.35}
-.featureicon{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 10px;border-radius:50%;font-size:28px;border:1px solid currentColor;background:#ffffff08;box-shadow:0 0 20px #693bff30}
-.feature:nth-child(1) .featureicon{color:var(--gold);box-shadow:0 0 25px #ffd85a32}.feature:nth-child(2) .featureicon{color:#ff55d2;box-shadow:0 0 25px #ff55d232}.feature:nth-child(3) .featureicon{color:var(--cyan);box-shadow:0 0 25px #16d9ff32}
-.divider{height:1px;background:linear-gradient(90deg,transparent,#5364b8,transparent);margin:0 auto 20px;max-width:420px}
-footer{text-align:center;color:#aeb8e9;font-size:11px;letter-spacing:.22em;line-height:1.8;padding:0 10px}
-.footericon{font-size:25px;color:var(--gold);margin-bottom:4px;filter:drop-shadow(0 0 10px #ffd85a80)}
-.hidden{display:none!important}
-.gamecard{text-align:center;margin-top:20px}
-.wheelwrap{position:relative;width:min(70vw,300px);margin:25px auto 15px}
-.pointer{position:absolute;z-index:2;top:-13px;left:50%;transform:translateX(-50%);font-size:32px;color:#ff4eac;text-shadow:0 2px 0 white}
-.wheel{width:100%;aspect-ratio:1;border:8px solid #fff;border-radius:50%;background:conic-gradient(#ff5c45 0 45deg,#ffd64c 45deg 90deg,#19c7b5 90deg 135deg,#4a8dff 135deg 180deg,#a05cff 180deg 225deg,#ff4ba6 225deg 270deg,#5cd68b 270deg 315deg,#ff9f43 315deg 360deg);box-shadow:0 0 0 4px #191b69,0 0 35px #8b39ff75;transition:transform 4s cubic-bezier(.12,.7,.15,1)}
-.wheel:after{content:"SPIN";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:72px;height:72px;border:5px solid #20276c;border-radius:50%;background:white;color:#20276c;font-weight:1000}
-.result{font-size:19px;font-weight:900;color:#7020cb;min-height:30px}
-.secondary{border:1px solid #d8c5ff;background:#f1e9ff;color:#5020a8;border-radius:13px;padding:13px 18px;font-weight:850;cursor:pointer}
-@media(max-width:480px){
- .wrap{width:min(100% - 22px,760px);padding-top:20px}.hero{padding-bottom:20px}
- .card{padding:22px 17px;border-radius:24px}.cardhead{gap:13px;margin-bottom:21px}
- .avatar{width:54px;height:54px;flex-basis:54px;border-radius:17px;font-size:25px}
- .sub{font-size:14px}.inputwrap{border-radius:14px;padding:0 12px}input[type=text],input[type=tel]{padding:16px 0;font-size:16px}
- .consent{font-size:13px;gap:10px}.cta{min-height:65px;border-radius:17px;gap:10px;padding:14px 12px}
- .features{gap:4px;margin-top:26px}.feature{font-size:12px;padding:8px 2px}.featureicon{width:54px;height:54px;font-size:24px}
- .tagline{font-size:10px;letter-spacing:.13em}.tagline:before,.tagline:after{margin:0 5px;width:15px}
-}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
-</head>
-<body>
-<div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<main class="wrap">
-<header class="hero">
-  <div class="crown" aria-hidden="true">♛</div>
-  <div class="year">2029</div>
-  <div class="brand">THINETH</div>
-  <div class="headline">SPIN &amp; WIN</div>
-  <p class="tagline">REGISTER · SPIN · WIN · HAVE FUN</p>
-</header>
-
+:root{--bg:#080e35;--panel:#121b50;--line:#303c7b;--cyan:#22d3ee;--pink:#f472d0;--gold:#ffd85a;--text:#f5f7ff;--muted:#b8c2ef}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#283080 0,#080e35 65%);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+main{width:min(100% - 24px,850px);margin:auto;padding:24px 0 44px}.hero{text-align:center;padding:14px 8px 25px}.crown{font-size:34px;color:var(--gold)}.year{font-size:clamp(58px,14vw,100px);font-weight:1000;line-height:1;background:linear-gradient(#fff8a5,#ff9d31,#ff34bc);color:transparent;background-clip:text}.brand{font-size:clamp(22px,5vw,38px);font-weight:950;letter-spacing:.13em}.headline{font-size:clamp(28px,7vw,52px);font-weight:1000;font-style:italic;background:linear-gradient(90deg,#ffec70,#ff34bc,#16d9ff);color:transparent;background-clip:text}.tagline{color:#e0e8ff;font-size:12px;letter-spacing:.18em}
+.card{background:linear-gradient(145deg,#fff,#f1efff);color:#101849;border:1px solid white;border-radius:26px;padding:clamp(18px,4vw,32px);box-shadow:0 20px 70px #020725a8;margin:16px 0}.hidden{display:none!important}h1,h2,p{margin-top:0}h2{margin-bottom:8px;font-size:clamp(24px,5vw,32px)}.sub{color:#606b9a;line-height:1.5}.field{margin:17px 0}label{display:block;font-weight:850;font-size:13px;margin-bottom:7px}.input{width:100%;border:1.5px solid #c9c7fa;border-radius:13px;background:white;padding:15px;font:inherit;font-size:16px;color:#101849}.consent{display:flex;gap:10px;align-items:flex-start;line-height:1.5}.consent input{margin-top:4px}.privacy{font-size:12px;color:#6d769b;line-height:1.5}.btn{border:0;border-radius:14px;padding:14px 18px;font:inherit;font-weight:900;cursor:pointer}.primary{width:100%;color:white;background:linear-gradient(100deg,#ff4c29,#ff159f,#7332ff);box-shadow:0 5px 0 #5914b2}.btn:disabled{opacity:.55;cursor:wait}.message{min-height:22px;color:#b42318;text-align:center;margin-top:12px;font-weight:700;font-size:14px}.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}.game-choice{border:1px solid #d6d1ff;border-radius:18px;padding:17px;background:white;text-align:left;color:#101849;cursor:pointer;min-height:150px}.game-choice .emoji{font-size:34px}.game-choice strong{display:block;font-size:18px;margin:8px 0 4px}.game-choice span:last-child{color:#68739d;font-size:13px}.playarea{margin-top:18px;text-align:center}.hud{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-weight:800;margin:10px}.stage{width:100%;max-width:600px;display:block;margin:12px auto;border:2px solid #c9c7fa;border-radius:14px;background:#0a123d;touch-action:manipulation}.game-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px 0}.secondary{background:#eee8ff;color:#5121a8;border:1px solid #d4c5ff}.instructions{font-size:13px;color:#606b9a;line-height:1.5}.back{margin:8px 0 0}.footer{text-align:center;color:#b8c2ef;font-size:11px;letter-spacing:.15em;margin-top:24px}
+@media(max-width:520px){.games{gap:9px}.game-choice{padding:13px;min-height:140px}.card{border-radius:21px}.btn{padding:13px 14px}}
+</style></head><body><main>
+<header class="hero"><div class="crown">♛</div><div class="year">2029</div><div class="brand">THINETH</div><div class="headline">PLAY &amp; WIN</div><p class="tagline">REGISTER · CHOOSE · PLAY · HAVE FUN</p></header>
 <section class="card" id="registration">
-  <div class="cardhead">
-    <div class="avatar" aria-hidden="true">♙</div>
-    <div><h2>Register to Play</h2><p class="sub">Enter your details to spin the wheel and discover your surprise!</p></div>
-  </div>
-  <form id="registrationForm" novalidate>
-    <div class="field">
-      <label for="studentName">YOUR FULL NAME</label>
-      <div class="inputwrap"><span class="inputicon" aria-hidden="true">♙</span><input id="studentName" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Enter your full name" required></div>
-    </div>
-    <div class="field">
-      <label for="whatsapp">WHATSAPP NUMBER</label>
-      <div class="inputwrap"><span class="inputicon" aria-hidden="true">🟢</span><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="e.g. 07XXXXXXXX" required></div>
-    </div>
-    <label class="consent"><input id="consent" type="checkbox" required><span>I agree to register for the game.</span></label>
-    <p class="privacy">Please enter your own contact number. Your details should be handled securely by the organiser. If you are under 18, ask a parent or guardian before registering.</p>
-    <button class="cta" type="submit"><span class="gift" aria-hidden="true">🎁</span><span>Register &amp; Play</span><span class="arrow" aria-hidden="true">›</span></button>
-    <div class="message" id="formMessage" aria-live="polite"></div>
-  </form>
-</section>
-
-<section class="card gamecard hidden" id="game" aria-live="polite">
-  <h2>🎡 Spin the Wheel!</h2><p class="sub" id="welcome">Good luck!</p>
-  <div class="wheelwrap"><div class="pointer">▼</div><div class="wheel" id="wheel"></div></div>
-  <button class="cta" type="button" id="spinButton"><span class="gift">🎁</span><span>SPIN NOW</span><span class="arrow">›</span></button>
-  <p class="result" id="result"></p>
-  <button class="secondary hidden" id="againButton" type="button">Spin again</button>
-</section>
-
-<div class="features" aria-label="Game highlights">
-  <div class="feature"><div class="featureicon">⚡</div>Quick<br>Registration</div>
-  <div class="feature"><div class="featureicon">🎁</div>Spin the<br>Wheel</div>
-  <div class="feature"><div class="featureicon">★</div>Surprise<br>Moment</div>
-</div>
-<div class="divider"></div>
-<footer><div class="footericon">♛</div>THINETH HIGHER EDUCATIONAL INSTITUTE</footer>
-</main>
+<h2>🎮 Register to Play</h2><p class="sub">Enter your details to unlock all four mini games.</p>
+<form id="registrationForm" novalidate>
+<div class="field"><label for="studentName">YOUR FULL NAME</label><input class="input" id="studentName" type="text" maxlength="100" autocomplete="name" placeholder="Enter your full name" required></div>
+<div class="field"><label for="whatsapp">WHATSAPP NUMBER</label><input class="input" id="whatsapp" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="e.g. 07XXXXXXXX" required></div>
+<label class="consent"><input id="consent" type="checkbox" required><span>I agree to register for the game and understand the organiser will use these details to manage my participation.</span></label>
+<p class="privacy">Please enter your own contact number. If you are under 18, ask a parent or guardian before registering.</p>
+<button class="btn primary" id="registerButton" type="submit">Register &amp; Unlock Games →</button><div class="message" id="formMessage" aria-live="polite"></div>
+</form></section>
+<section class="card hidden" id="gameMenu"><h2 id="welcome">Choose your game!</h2><p class="sub">Pick any game below. You can return here and try all four.</p>
+<div class="games">
+<button class="game-choice" data-game="dino"><span class="emoji">🦖</span><strong>Dino Run</strong><span>Jump over obstacles and beat your score.</span></button>
+<button class="game-choice" data-game="flappy"><span class="emoji">🐤</span><strong>Flappy Challenge</strong><span>Tap to fly through the gaps.</span></button>
+<button class="game-choice" data-game="brick"><span class="emoji">🧱</span><strong>Brick Breaker</strong><span>Break the bricks with your bouncing ball.</span></button>
+<button class="game-choice" data-game="2048"><span class="emoji">🔢</span><strong>2048 Puzzle</strong><span>Merge matching numbers to reach 2048.</span></button>
+</div></section>
+<section class="card hidden" id="playPanel"><h2 id="gameTitle">Mini Game</h2><p class="sub" id="gameInstructions"></p><div class="hud"><span>Score: <b id="score">0</b></span><span>Best: <b id="best">0</b></span></div><canvas class="stage" id="stage" width="600" height="300" aria-label="Game play area"></canvas>
+<div id="touchControls" class="game-controls hidden"><button class="btn secondary" id="leftBtn">← Left</button><button class="btn secondary" id="actionBtn">Jump / Tap</button><button class="btn secondary" id="rightBtn">Right →</button></div>
+<div class="game-controls"><button class="btn primary" style="width:auto" id="startBtn">Start / Restart</button><button class="btn secondary" id="menuBtn">All games</button></div><p class="instructions" id="gameHint"></p><div class="message" id="gameMessage" aria-live="polite"></div></section>
+<div class="footer">♛ THINETH HIGHER EDUCATIONAL INSTITUTE</div></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SUPABASE_URL = "https://wvyerpzzqljthfgofcgc.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4W_d2ka7IakSo6ASSbFI_g_QAiaxCrL";
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-const form = document.getElementById("registrationForm");
-const message = document.getElementById("formMessage");
-const registration = document.getElementById("registration");
-const game = document.getElementById("game");
-const nameInput = document.getElementById("studentName");
-const phoneInput = document.getElementById("whatsapp");
-const consentInput = document.getElementById("consent");
-const wheel = document.getElementById("wheel");
-let spinning = false;
-
-form.addEventListener("submit", async function (event) {
-  event.preventDefault();
-  const name = nameInput.value.trim();
-  const phone = phoneInput.value.trim();
-  if (name.length < 2) { message.textContent = "Please enter your full name."; nameInput.focus(); return; }
-  if (!/^[+0-9 ()-]{7,20}$/.test(phone)) { message.textContent = "Please enter a valid WhatsApp number."; phoneInput.focus(); return; }
-  if (!consentInput.checked) { message.textContent = "Please confirm your consent to continue."; return; }
-
-  const submitButton = form.querySelector('button[type="submit"]');
-  submitButton.disabled = true;
-  message.style.color = "#5b21b6";
-  message.textContent = "Registering securely...";
-  try {
-    const { error } = await supabaseClient
-      .from("student_registrations")
-      .insert({ full_name: name, whatsapp_number: phone });
-    if (error) throw error;
-    document.getElementById("welcome").textContent = "Good luck, " + name + "! Tap below and see what the wheel brings.";
-    message.textContent = "";
-    registration.classList.add("hidden");
-    game.classList.remove("hidden");
-    game.scrollIntoView({ behavior: "smooth", block: "start" });
-  } catch (error) {
-    console.error("Registration failed:", error);
-    message.style.color = "#b42318";
-    message.textContent = "Registration could not be saved. Please check your connection and try again.";
-  } finally {
-    submitButton.disabled = false;
-  }
-});
-
-document.getElementById("spinButton").addEventListener("click", function () {
-  if (spinning) return;
-  spinning = true;
-  this.disabled = true;
-  document.getElementById("result").textContent = "Spinning...";
-  document.getElementById("againButton").classList.add("hidden");
-  const degrees = 1800 + Math.floor(Math.random() * 1800);
-  wheel.style.transform = "rotate(" + degrees + "deg)";
-  window.setTimeout(() => {
-    const prizes = [
-      "✨ Surprise unlocked!",
-      "🎉 You're a lucky star!",
-      "⭐ Amazing energy!",
-      "🎁 A little moment of joy!",
-      "💫 Keep shining!",
-      "🌟 Thanks for playing!"
-    ];
-    document.getElementById("result").textContent = prizes[Math.floor(Math.random() * prizes.length)];
-    document.getElementById("againButton").classList.remove("hidden");
-    document.getElementById("spinButton").disabled = false;
-    spinning = false;
-  }, 4100);
-});
-document.getElementById("againButton").addEventListener("click", () => {
-  wheel.style.transition = "none";
-  wheel.style.transform = "rotate(0deg)";
-  void wheel.offsetWidth;
-  wheel.style.transition = "";
-  document.getElementById("result").textContent = "";
-  document.getElementById("againButton").classList.add("hidden");
-});
-</script>
-</body>
-</html>
+const SUPABASE_URL="https://wvyerpzzqljthfgofcgc.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_4W_d2ka7IakSo6ASSbFI_g_QAiaxCrL";
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);let playerName="",activeGame="",running=false,raf=0,score=0,best=0,gameState={};
+const registration=$("registration"),menu=$("gameMenu"),panel=$("playPanel"),canvas=$("stage"),ctx=canvas.getContext("2d");
+function show(el){[registration,menu,panel].forEach(x=>x.classList.add("hidden"));el.classList.remove("hidden");el.scrollIntoView({behavior:"smooth",block:"start"});}
+$("registrationForm").addEventListener("submit",async e=>{e.preventDefault();const name=$("studentName").value.trim(),phone=$("whatsapp").value.trim();if(name.length<2){$("formMessage").textContent="Please enter your full name.";return}if(!/^[+0-9 ()-]{7,20}$/.test(phone)){$("formMessage").textContent="Please enter a valid WhatsApp number.";return}if(!$("consent").checked){$("formMessage").textContent="Please confirm your consent to continue.";return}
+const btn=$("registerButton");btn.disabled=true;$("formMessage").style.color="#5121a8";$("formMessage").textContent="Saving your registration…";
+try{const {error}=await supabaseClient.from("student_registrations").insert({full_name:name,whatsapp_number:phone});if(error)throw error;playerName=name;$("welcome").textContent="Welcome, "+name+"! Choose any game.";show(menu)}catch(err){console.error(err);$("formMessage").style.color="#b42318";$("formMessage").textContent="Registration could not be saved. Please check your connection and try again."}finally{btn.disabled=false}});
+const titles={dino:"Dino Run",flappy:"Flappy Challenge",brick:"Brick Breaker", "2048":"2048 Puzzle"};
+const instructions={dino:"Press Space, ↑, or tap Jump to hop over obstacles.",flappy:"Tap the game area or press Space to flap through the gaps.",brick:"Move the paddle with your finger/mouse or ← →. Keep the ball in play.", "2048":"Use arrow keys or swipe. Merge equal tiles; reach 2048."};
+document.querySelectorAll("[data-game]").forEach(b=>b.addEventListener("click",()=>openGame(b.dataset.game)));
+function openGame(g){stopGame();activeGame=g;score=0;$("score").textContent="0";$("gameTitle").textContent=titles[g];$("gameInstructions").textContent=instructions[g];$("gameMessage").textContent="";$("gameHint").textContent=g==="2048"?"Swipe or use arrow keys. New game resets the board.":"Use the on-screen controls on mobile or keyboard on desktop."; $("touchControls").classList.toggle("hidden",g==="2048");show(panel);resetGame();drawGame()}
+function stopGame(){running=false;if(raf)cancelAnimationFrame(raf);raf=0}
+function resetGame(){const key="thineth-best-"+activeGame;best=Number(localStorage.getItem(key)||0);$("best").textContent=best;gameState={};if(activeGame==="dino")Object.assign(gameState,{x:75,y:220,vy:0,ground:220,obs:[],spawn:0,speed:4});if(activeGame==="flappy")Object.assign(gameState,{x:120,y:145,vy:0,pipes:[],spawn:0,started:false});if(activeGame==="brick")Object.assign(gameState,{x:300,y:250,vx:3,vy:-3,paddle:250,bricks:[],started:false});if(activeGame==="2048")newBoard()}
+function addScore(n){score+=n;$("score").textContent=score;if(score>best){best=score;$("best").textContent=best;localStorage.setItem("thineth-best-"+activeGame,String(best))}}
+function endGame(msg){stopGame();$("gameMessage").textContent=msg+" Score: "+score+". Press Start / Restart to play again."}
+function drawGame(){ctx.clearRect(0,0,600,300);ctx.fillStyle="#0a123d";ctx.fillRect(0,0,600,300);ctx.strokeStyle="#1c2b69";for(let x=0;x<600;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,300);ctx.stroke()}for(let y=0;y<300;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(600,y);ctx.stroke()}
+if(activeGame==="dino")drawDino();if(activeGame==="flappy")drawFlappy();if(activeGame==="brick")drawBrick();if(activeGame==="2048")draw2048()}
+function drawDino(){const s=gameState;ctx.fillStyle="#22d3ee";ctx.fillRect(0,245,600,3);ctx.fillStyle="#f472d0";ctx.fillRect(s.x,s.y,32,28);ctx.fillRect(s.x+20,s.y-12,18,18);ctx.fillStyle="#fff";ctx.fillRect(s.x+30,s.y-7,4,4);ctx.fillStyle="#ffd85a";s.obs.forEach(o=>ctx.fillRect(o.x,245-o.h,o.w,o.h));if(!running)overlay("DINO RUN","Press Start, then jump!")}
+function drawFlappy(){const s=gameState;ctx.fillStyle="#22d3ee";ctx.beginPath();ctx.arc(s.x,s.y,13,0,Math.PI*2);ctx.fill();ctx.fillStyle="#f472d0";s.pipes.forEach(p=>{ctx.fillRect(p.x,0,48,p.gapY);ctx.fillRect(p.x,p.gapY+105,48,300-p.gapY-105)});if(!running)overlay("FLAPPY CHALLENGE","Tap / Space to flap")}
+function drawBrick(){const s=gameState;ctx.fillStyle="#f472d0";s.bricks.forEach(b=>{if(b.on){ctx.fillRect(b.x,b.y,48,17)}});ctx.fillStyle="#ffd85a";ctx.fillRect(s.paddle,270,100,12);ctx.fillStyle="#22d3ee";ctx.beginPath();ctx.arc(s.x,s.y,8,0,Math.PI*2);ctx.fill();if(!running)overlay("BRICK BREAKER","Move paddle, press Start")}
+function draw2048(){const s=gameState;const cell=68,gap=8,left=94,top=18;for(let r=0;r<4;r++)for(let c=0;c<4;c++){const v=s.board[r][c],x=left+c*(cell+gap),y=top+r*(cell+gap);ctx.fillStyle=v?tileColor(v):"#172451";ctx.fillRect(x,y,cell,cell);if(v){ctx.fillStyle=v<=4?"#101849":"#fff";ctx.font="bold "+(v>=1024?18:24)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(v,x+cell/2,y+cell/2)}}ctx.textAlign="start";ctx.textBaseline="alphabetic";if(!running)overlay("2048 PUZZLE","Use arrows or swipe to move")}
+function tileColor(v){return ({2:"#dce7ff",4:"#a9c9ff",8:"#67d7f5",16:"#32c6c7",32:"#65d68b",64:"#e4d64c",128:"#ffb14e",256:"#ff8b62",512:"#ff6b9d",1024:"#b57aff",2048:"#f472d0"})[v]||"#b57aff"}
+function overlay(a,b){ctx.fillStyle="#060b28d9";ctx.fillRect(0,105,600,90);ctx.fillStyle="#fff";ctx.textAlign="center";ctx.font="bold 26px system-ui";ctx.fillText(a,300,142);ctx.font="15px system-ui";ctx.fillText(b,300,171);ctx.textAlign="start"}
+function newBoard(){gameState.board=Array.from({length:4},()=>[0,0,0,0]);spawnTile();spawnTile()}
+function spawnTile(){let empty=[];gameState.board.forEach((row,r)=>row.forEach((v,c)=>{if(!v)empty.push([r,c])}));if(empty.length){const [r,c]=empty[Math.floor(Math.random()*empty.length)];gameState.board[r][c]=Math.random()<.9?2:4}}
+function move2048(dir){const b=gameState.board;let moved=false,merged=0;for(let i=0;i<4;i++){let line=Array.from({length:4},(_,j)=>dir==="left"?b[i][j]:dir==="right"?b[i][3-j]:dir==="up"?b[j][i]:b[3-j][i]);let vals=line.filter(Boolean),out=[];for(let j=0;j<vals.length;j++){if(vals[j]===vals[j+1]){out.push(vals[j]*2);merged+=vals[j]*2;j++}else out.push(vals[j])}while(out.length<4)out.push(0);for(let j=0;j<4;j++){const r=dir==="left"||dir==="right"?i:(dir==="up"?j:3-j),c=dir==="left"?j:dir==="right"?3-j:i;if(b[r][c]!==out[j])moved=true;b[r][c]=out[j]}}if(moved){spawnTile();if(merged)addScore(merged);drawGame();if(b.some(row=>row.includes(2048))){endGame("2048 reached! You win!");return}if(!canMove())endGame("No moves left.")}}
+function canMove(){const b=gameState.board;for(let r=0;r<4;r++)for(let c=0;c<4;c++){if(!b[r][c])return true;if(c<3&&b[r][c]===b[r][c+1])return true;if(r<3&&b[r][c]===b[r+1][c])return true}return false}
+function startGame(){stopGame();score=0;$("score").textContent="0";$("gameMessage").textContent="";resetGame();if(activeGame==="2048"){running=false;drawGame();return}running=true;if(activeGame==="flappy")gameState.started=true;if(activeGame==="brick"){gameState.started=true;gameState.bricks=[];for(let r=0;r<4;r++)for(let c=0;c<9;c++)gameState.bricks.push({x:35+c*59,y:25+r*24,on:true})}tick()}
+function tick(){if(!running)return;const s=gameState;
+if(activeGame==="dino"){s.vy+=.65;s.y+=s.vy;if(s.y>s.ground){s.y=s.ground;s.vy=0}s.spawn++;if(s.spawn>70){s.spawn=0;s.obs.push({x:610,w:18+Math.random()*14,h:25+Math.random()*30})}s.obs.forEach(o=>o.x-=s.speed);s.obs=s.obs.filter(o=>o.x>-40);s.speed=4+Math.min(5,score/50);s.obs.forEach(o=>{if(s.x+28>o.x&&s.x<o.x+o.w&&s.y+28>245-o.h)endGame("Game over!")});if(Math.floor(performance.now()/400)!==Math.floor((performance.now()-16)/400))addScore(1)}
+if(activeGame==="flappy"){s.vy+=.28;s.y+=s.vy;s.spawn++;if(s.spawn>95){s.spawn=0;s.pipes.push({x:610,gapY:35+Math.random()*115,passed:false})}s.pipes.forEach(p=>{p.x-=2.8;if(!p.passed&&p.x+48<s.x){p.passed=true;addScore(1)}if(s.x+10>p.x&&s.x-10<p.x+48&&(s.y-10<p.gapY||s.y+10>p.gapY+105))endGame("Oops! Hit an obstacle.")});s.pipes=s.pipes.filter(p=>p.x>-55);if(s.y<0||s.y>300)endGame("Flight over!")}
+if(activeGame==="brick"){s.x+=s.vx;s.y+=s.vy;if(s.x<8||s.x>592)s.vx*=-1;if(s.y<8)s.vy*=-1;if(s.y>258&&s.y<285&&s.x>s.paddle&&s.x<s.paddle+100){s.vy=-Math.abs(s.vy);s.vx+=(s.x-(s.paddle+50))*.025}if(s.y>300){endGame("Ball lost!")}s.bricks.forEach(b=>{if(b.on&&s.x>b.x&&s.x<b.x+48&&s.y>b.y&&s.y<b.y+17){b.on=false;s.vy*=-1;addScore(10)}});if(s.bricks.every(b=>!b.on))endGame("All bricks cleared!")}
+drawGame();if(running)raf=requestAnimationFrame(tick)}
+function action(){if(activeGame==="dino"){if(gameState.y>=gameState.ground-1)gameState.vy=-12}else if(activeGame==="flappy"){gameState.vy=-5.5;if(!running)startGame()}else if(activeGame==="brick"){if(!running)startGame()}}
+$("startBtn").addEventListener("click",startGame);$("menuBtn").addEventListener("click",()=>{stopGame();show(menu)});$("actionBtn").addEventListener("click",action);$("leftBtn").addEventListener("click",()=>{if(activeGame==="brick")gameState.paddle=Math.max(0,gameState.paddle-35);else action()});$("rightBtn").addEventListener("click",()=>{if(activeGame==="brick")gameState.paddle=Math.min(500,gameState.paddle+35);else action()});
+canvas.addEventListener("pointerdown",e=>{if(activeGame==="2048")return;if(activeGame==="brick"){const r=canvas.getBoundingClientRect();gameState.paddle=Math.max(0,Math.min(500,(e.clientX-r.left)/r.width*600-50));if(!running)startGame()}else action()});
+window.addEventListener("keydown",e=>{if(panel.classList.contains("hidden"))return;if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key))e.preventDefault();if(activeGame==="2048"){const map={ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down"};if(map[e.key])move2048(map[e.key]);return}if(activeGame==="dino"&&(e.key===" "||e.key==="ArrowUp"))action();if(activeGame==="flappy"&&(e.key===" "||e.key==="ArrowUp"))action();if(activeGame==="brick"){if(e.key==="ArrowLeft")gameState.paddle=Math.max(0,gameState.paddle-25);if(e.key==="ArrowRight")gameState.paddle=Math.min(500,gameState.paddle+25)}});
+let touchX=0,touchY=0;canvas.addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY},{passive:true});canvas.addEventListener("touchend",e=>{if(activeGame!=="2048")return;const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.max(Math.abs(dx),Math.abs(dy))<20)return;move2048(Math.abs(dx)>Math.abs(dy)?(dx>0?"right":"left"):(dy>0?"down":"up"))},{passive:true});
+</script></body></html>
